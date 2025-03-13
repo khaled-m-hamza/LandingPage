@@ -1,0 +1,431 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Header</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toggleButton = document.getElementById("navbar-toggler");
+            const navbarNav = document.getElementById("navbarNav");
+            const languageDropdown = document.getElementById("languageDropdown");
+            const languageLinks = document.querySelectorAll(".dropdown-item");
+
+            toggleButton.addEventListener("click", function () {
+                navbarNav.classList.toggle("show");
+            });
+
+            languageDropdown.addEventListener("click", function () {
+                this.classList.toggle("show");
+            });
+
+            languageLinks.forEach(link => {
+                link.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const lang = this.getAttribute("data-lang");
+                    if (lang === "en") {
+                        window.location.href = "/Home/en";
+                    } else if (lang === "ar") {
+                        window.location.href = "/Home/index";
+                    }
+                });
+            });
+        });
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const bubbleContainer = document.getElementById("bubble-container");
+            const containerWidth = bubbleContainer.offsetWidth;
+            const containerHeight = bubbleContainer.offsetHeight;
+
+            // Create 20 bubbles
+            for (let i = 0; i < 20; i++) {
+                createBubble(bubbleContainer, containerWidth, containerHeight);
+            }
+
+            // Continue creating bubbles at intervals
+            setInterval(() => {
+                createBubble(bubbleContainer, containerWidth, containerHeight);
+            }, 1000);
+        });
+
+        function createBubble(container, containerWidth, containerHeight) {
+            const bubble = document.createElement("div");
+            bubble.classList.add("bubble");
+
+            // Random size between 10px and 50px
+            const size = Math.floor(Math.random() * 40) + 20;
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+
+            // Random horizontal position
+            const left = Math.floor(Math.random() * containerWidth);
+            bubble.style.left = `${left}px`;
+
+            // Start from bottom
+            bubble.style.bottom = `-${size}px`;
+
+            // Random horizontal movement
+            const translateX = Math.floor(Math.random() * 200) - 100; // -100px to +100px
+            bubble.style.setProperty('--translate-x', `${translateX}px`);
+
+            // Random animation duration
+            const duration = Math.floor(Math.random() * 10) + 8; // 8-18 seconds
+            bubble.style.animationDuration = `${duration}s`;
+
+            // Random animation delay
+            const delay = Math.random() * 5;
+            bubble.style.animationDelay = `${delay}s`;
+
+            // Remove bubble after animation completes
+            setTimeout(() => {
+                bubble.remove();
+            }, (duration + delay) * 1000);
+
+            container.appendChild(bubble);
+        }
+    </script>
+    <style>
+        .collapse:not(.show) {
+            display: none;
+        }
+
+        .dropdown-menu {
+            display: none;
+        }
+
+        .dropdown.show .dropdown-menu {
+            display: block;
+        }
+
+        .icon, h3 {
+            font-size: 40px;
+            color: #17c1a3;
+        }
+
+        .section-box {
+            text-align: center;
+            padding: 20px;
+        }
+
+            .section-box h3 {
+                margin-top: 15px;
+                font-weight: bold;
+            }
+
+            .section-box p {
+                color: #555;
+            }
+
+        .about-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 0;
+        }
+
+        .about-content {
+            max-width: 600px;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px; /* Optional: Rounded corners */
+        }
+
+        .icon-wrapper {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: #f8f9fa;
+        }
+
+        .contact-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Full screen height */
+            background: url('back2.jpeg') no-repeat center center/cover;
+            overflow: hidden; /* Ensures bubbles don't create scrollbars */
+        }
+
+        .overlay-text {
+            background: #ffffffce; /* Gray with 50% opacity */
+        }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.808), rgba(113, 212, 245, 0.26));
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.3);
+            animation: float 2s infinite;
+            z-index: 1;
+        }
+
+        @@keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-100vh) translateX(var(--translate-x));
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-light shadow fixed-top w-100 px-3 overlay-text" style="padding:5px;">
+        <img src="~/logo.png" class="navbar-brand" style="border-radius:10px;">
+        <button id="navbar-toggler" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown" id="languageDropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" style="font-weight: bolder;">اللغه</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/">عربيه</a></li>
+                        <li><a class="dropdown-item" href="#" data-lang="en">انجليزيه</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#section1" style="font-weight: bolder;">تواصل معنا</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#section2" style="font-weight: bolder;">من نحن </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#section3" style="font-weight: bolder;">مميزات </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#section4" style="font-weight: bolder;">منتجاتنا</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero-section d-flex align-items-center justify-content-center text-center text-white flex-column" id="bubble-container">
+        @*     <h1 class="display-4 fw-bold">Welcome to My Website</h1>
+        <p class="lead">This is a full-screen hero section with Bootstrap.</p> *@
+    </div>
+    <div class="my-5" style="margin:0!important; background-color :#e6f7ff">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <div class="section-box">
+                    <div class="icon">🤝</div>
+                    <h3>القيم الجوهرية</h3>
+                    <p>نحن نؤمن بأن الولاء، الابتكار، الجودة، العمل الجماعي، الشراكة هي أساس إجراءات الشركة التي تؤدي إلى نجاح أعمالنا.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="section-box">
+                    <div class="icon">💼</div>
+                    <h3>المهمة</h3>
+                    <p>توفير سوق المكملات الغذائية والمستحضرات الصيدلانية من خلال منتجات مبتكرة وعالية الجودة من أجل رعاية صحية أفضل.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="section-box">
+                    <div class="icon">👁️</div>
+                    <h3>الرؤية</h3>
+                    <p>توفير المستحضرات الصيدلانية والمكملات الغذائية عالية الجودة مما يجعلها أكثر قابلية للوصول إلى الاحتياجات المطلوبة المستحقة لعملاء لدينا.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="my-5" style="margin:0 !important;">
+        <div class="row align-items-center">
+            <!-- Left Part - Image -->
+            <div class="col-md-6 image-container">
+                <img src="~/photo2.jpg" alt="Sample Image" class="img-fluid">
+            </div>
+            <!-- Right Part - Text -->
+            <div class="col-md-6">
+                <h1 style="display: flex;justify-content: center;color: #17c1a3;">
+                    OZONE شركه
+                </h1>
+                <p style="display: flex;justify-content: center;">شركه متخصصه في المكملات الغذائيه بافضل جوده لاحسن  </p>
+            </div>
+        </div>
+    </div>
+    @* /////section 1/// *@
+
+
+    <div class="my-5" style="margin:0!important;" id="section2">
+        <div class="row align-items-center">
+            <!-- Left Part - Image -->
+            <!-- Right Part - Text -->
+            <div class="col-md-6">
+                <h1 style="display: flex;justify-content: center;color: #17c1a3;">
+                    من نحن
+                </h1>
+                <p style="display: flex;justify-content: center;">نحن شركه للمكملات الطبيه بمنتجات طبيعيه نباتيه </p>
+            </div>
+            <div class="col-md-6 image-container">
+                <img src="~/photo.jpg" alt="Sample Image" class="img-fluid">
+            </div>
+        </div>
+    </div>
+    @* ///////////////////////////// *@
+    <!-- Products Section -->
+    <div class="container-fluid py-5" id="section4" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="text-center mb-5" style="color: #17c1a3;">منتجاتنا</h2>
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" style="display: flex; justify-content: center;">
+                @foreach (var product in Model)
+                {
+                    <div class="col" style="width: 40%;">
+                        <div class="card h-100 shadow-sm" style="width: 100%; height: 120%;">
+                            <div style="width: 100%; height: 310px; overflow: hidden;">
+                                <img src="~/@product.img" class="card-img-top" alt="@product.ARName"
+                                     style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="card-body text-center">
+                                <h5 class="card-title fw-bold">@product.ARName</h5>
+                                @* <p class="card-text">@Html.Raw(@product.ARDescription)</p> *@
+                                <a href="/Home/ArDetails/@product.Id" class="btn w-100"
+                                   style="background-color: #17c1a3; color: white;">عرض التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    @* ////////////////////////////// *@
+
+    @* /////section 2/// *@
+    <div class="my-5" style="margin:0!important; background-color:#e6f7ff" id="section3">
+
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="section-box">
+                    <div class="icon">🏢</div>
+                    <h3>الجودة</h3>
+                    <p>الجودة أمر بالغ الأهمية. ونراقب في OZONE على دراية كبيرة بأحدث الأمور المتعلقة بالمكملات الغذائية.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="section-box">
+                    <div class="icon">🤝</div>
+                    <h3>رعاية العميل</h3>
+                    <p>تضمن OZONE مساعدة شركائها في تحقيق النجاح، من خلال مستوى خدمة العملاء على استعداد لإرشادك خلال أي مرحلة من مراحل عملية تطوير المنتج بهدف إرضائك.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="section-box">
+                    <div class="icon">💰</div>
+                    <h3>أسعار تنافسية</h3>
+                    <p>مع OZONE، أنت ملزم بالحصول على قيمة مقابل نقودك، نحن نقدم الخدمات التي تحتاجها بسعر تنافسي يتناسب بشكل جيد مع ميزانية عملك.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="section-box">
+                    <div class="icon">🌿</div>
+                    <h3>مكونات طبيعية</h3>
+                    <p>تلتزم OZONE باستخدام مكونات طبيعية عالية الجودة وأفضل ممارسات الصحة والعناية.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="section-box">
+                    <div class="icon">📊</div>
+                    <h3>نتائج</h3>
+                    <p>تلتزم OZONE بإحداث تأثير إيجابي طويل الأمد على سوق الرعاية الصحية، مما يوفر بيئة مبتكرة لإحداث الفرق الذي تطمح إليه.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="section-box">
+                    <div class="icon">🌍</div>
+                    <h3>تنوع</h3>
+                    <p>تقدم OZONE مجموعة واسعة من المنتجات المناسبة للجميع.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* /////section 3/// *@
+
+
+
+
+
+
+    <div class="py-5" style="padding:0!important;background-color:#ffffffe0">
+        <div class="row align-items-center">
+            <div class="col-lg-6 text-center mt-4 mt-lg-0">
+                <img src="~/catalog.png" alt="Furni Catalog" class="img-fluid">
+            </div>
+            <div class="col-lg-6 text-center text-lg-start" style="padding: 5%;text-align: center !important;">
+                <h2>OZONE كتالوج</h2>
+                <p>
+                    شركه رائده في المكملات الغذائيه بجوده عاليه
+                </p>
+                <a @* href="./PDF/CATALOG.pdf" *@ @* download="CATALOG.pdf" *@ class="btn btn-primary">Download</a>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="py-5" style="padding-top:0 !important;padding-bottom: 0 !important; background-color:#d3f0fd" id="section1">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="ratio ratio-16x9">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29383.334960273092!2d47.960395592809235!3d29.376174846895495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fcf9c83ce455983%3A0xc3ebaef5af09b90e!2sKuwait%20City%2C%20Kuwait!5e0!3m2!1sen!2seg!4v1729602633729!5m2!1sen!2seg" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+            <div class="col-lg-6" style="padding: 5%;direction: rtl;">
+                <h2 class="mb-4"> تواصل معنا</h2>
+                <div class="d-flex align-items-center mb-3">
+                    <div class="icon-wrapper me-3">
+                        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                    </div>
+                    <div>OZONE شركه<br>شارع احمد بك, الدور الرابع ,الامارات.</div>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <div class="icon-wrapper me-3">
+                        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <div>8:00am : 4:00pm<br><span class="text-muted">(من الأحد للخميس)</span></div>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <div class="icon-wrapper me-3">
+                        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                    </div>
+                    <div>+965 9998 0809</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

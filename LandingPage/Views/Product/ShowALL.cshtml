@@ -1,0 +1,56 @@
+﻿@model List<Product>
+<style>
+    th{
+        background-color:darkred;
+
+    }
+    th:hover{
+            background-color: black;
+    }
+</style>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary">📦 Product List</h2>
+        <a href="/Product/add" class="btn btn-success">➕ Add New Product</a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover text-center align-middle">
+            <thead class="table-dark">
+                <tr>
+                    
+                    <th>Arabic Name</th>
+                    <th>English Name</th>
+                    <th style="min-width: 200px;">Image</th> <!-- Increased column width -->
+                    <th style="min-width: 250px;">Arabic Description</th>
+                    <th style="min-width: 250px;">English Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Select((product, index) => new { Product = product, Index = index + 1 }))
+                {
+                    <tr>
+                        
+                        <td>@item.Product.ARName</td>
+                        <td>@item.Product.ENName</td>
+                        <td>
+                            <img src="~/@item.Product.img" class="img-thumbnail"
+                                 style="width: 180px; height: 120px; object-fit: cover; border-radius: 8px;" />
+                        </td>
+                        <td class="text-wrap">@Html.Raw(@item.Product.ARDescription)</td>
+                        <td class="text-wrap">@Html.Raw(@item.Product.ENDescription)</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a href="/Product/Details/@item.Product.Id" class="btn btn-info btn-sm">📜 Details</a>
+                                <a href="/Product/edit/@item.Product.Id" class="btn btn-warning btn-sm">✏️ Edit</a>
+                                <a href="/Product/Delete/@item.Product.Id" class="btn btn-danger btn-sm"
+                                   onclick="return confirm('متأكد انك تريد مسح هذا المنتج?');">🗑️ Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
