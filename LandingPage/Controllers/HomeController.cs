@@ -26,15 +26,18 @@ namespace LandingPage.Controllers
             return View("ArDetails", Pro);
         
         }
-        public IActionResult EnDetails()
+        public IActionResult EnDetail(int id)
         {
 
+            Product Pro = context.products.FirstOrDefault(d => d.Id == id);
+            return View("EnDetail", Pro);
 
-            return View();
         }
+
         public IActionResult en()
         {
-            return View("en");
+            List<Product> Products = context.products.ToList();
+            return View("en", Products);
         }
         public IActionResult Privacy()
         {

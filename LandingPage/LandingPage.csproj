@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Home\EnDetails.cshtml" />
     <Content Remove="Views\Home\indexenglish.cshtml" />
   </ItemGroup>
 
@@ -23,18 +24,28 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Home\EnDetails.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Home\indexenglish.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Home\EnDetails.cshtml" />
     <None Include="Views\Home\indexenglish.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\Home\EnDetail.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Update="Views\Home\ArDetails.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Home\EnDetails.cshtml" />
   </ItemGroup>
 
 </Project>

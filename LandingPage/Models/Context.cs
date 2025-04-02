@@ -13,7 +13,7 @@ namespace LandingPage.Models
         {
             //Data Source =.; Initial Catalog = LandingPage_Project; Integrated Security = True; Encrypt = False; Trust Server Certificate = True
             //Server = db15204.public.databaseasp.net; Database=db15204; User Id = db15204; Password=k-8L6S+g_rC4; Encrypt=False; MultipleActiveResultSets=True;
-            optionsBuilder.UseSqlServer("Server = db15204.public.databaseasp.net; Database=db15204; User Id = db15204; Password=k-8L6S+g_rC4; Encrypt=False; MultipleActiveResultSets=True;");
+            optionsBuilder.UseSqlServer("Data Source =.; Initial Catalog = LandingPage_Project; Integrated Security = True; Encrypt = False; Trust Server Certificate = True");
   
         }
 

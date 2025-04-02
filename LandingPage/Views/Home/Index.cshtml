@@ -3,13 +3,18 @@
     ViewData["Title"] = "Home Page";
 }
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Header</title>
+    <title> OZONE</title>
+    <icon src=""></icon>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+
+        /////////////////////////
         document.addEventListener("DOMContentLoaded", function () {
             const toggleButton = document.getElementById("navbar-toggler");
             const navbarNav = document.getElementById("navbarNav");
@@ -31,7 +36,7 @@
                     if (lang === "en") {
                         window.location.href = "/Home/en";
                     } else if (lang === "ar") {
-                        window.location.href = "/Home/index";
+                        window.location.href = "";
                     }
                 });
             });
@@ -89,8 +94,46 @@
 
             container.appendChild(bubble);
         }
+        /////////////////////
+        document.addEventListener("DOMContentLoaded", function() {
+    // Hero section image rotation
+    const heroSection = document.querySelector(".hero-section");
+    const heroImages = ["back2.jpeg", "2.jpeg", "3.jpeg","4.jpeg"];
+    let currentImageIndex = 0;
+    
+    // Set initial background
+    heroSection.style.backgroundImage = `url('${heroImages[0]}')`;
+    
+    // Change background image every 7 seconds
+    setInterval(() => {
+        currentImageIndex = (currentImageIndex + 1) % heroImages.length;
+        heroSection.style.backgroundImage = `url('${heroImages[currentImageIndex]}')`;
+    }, 5000);
+    
+    // Bubble animation (existing code)
+    const bubbleContainer = document.getElementById("bubble-container");
+    const containerWidth = bubbleContainer.offsetWidth;
+    const containerHeight = bubbleContainer.offsetHeight;
+
+    // Create 20 bubbles
+    for (let i = 0; i < 20; i++) {
+        createBubble(bubbleContainer, containerWidth, containerHeight);
+    }
+
+    // Continue creating bubbles at intervals
+    setInterval(() => {
+        createBubble(bubbleContainer, containerWidth, containerHeight);
+    }, 1000);
+});
     </script>
     <style>
+                :root {
+            --primary-color: #17c1a3;
+            --secondary-color: #2D6A87;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --transition: all 0.3s ease;
+        }
         .collapse:not(.show) {
             display: none;
         }
@@ -173,29 +216,136 @@
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.3);
             animation: float 2s infinite;
             z-index: 1;
+           
         }
-
-        @@keyframes float {
-            0% {
-                transform: translateY(0) translateX(0);
-                opacity: 0;
-            }
-
-            10% {
-                opacity: 0.8;
-            }
-
-            100% {
-                transform: translateY(-100vh) translateX(var(--translate-x));
-                opacity: 0;
-            }
+      
+ @@keyframes float {
+        0% {
+            transform: translateY(0) translateX(0);
+            opacity: 0;
         }
+        10% {
+            opacity: 0.8;
+        }
+        100% {
+            transform: translateY(-100vh) translateX(var(--translate-x));
+            opacity: 0;
+        }
+    }
+        /* ///////////////////////// */
+        .core-values {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .value-box {
+            background-color: #3E7A96;;
+            padding: 2rem;
+            border-radius: 15px;
+            transition: var(--transition);
+            height: 100%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .value-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .value-box h3 {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .value-box p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        /* //////////////// */
+        .about-section {
+            padding: 0;
+            background-color: var(--light-color);
+        }
+        
+        .about-image {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            transition: var(--transition);
+            transform: scale(1);
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .about-content {
+            padding: 2rem;
+            text-align: end;
+        }
+        
+        .about-content h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        .about-content  {
+         font-weight: bolder;
+        }
+        .certification-image {
+            max-height: 150px;
+            object-fit: contain;
+            margin: 10px;
+        }
+        .icon-wrapper {
+    display: flex;
+    justify-content: center;  /* Center horizontally */
+    align-items: center;      /* Center vertically */
+    width: 50px;  /* Adjust as needed */
+    height: 50px; /* Adjust as needed */
+}
+
+.email-icon {
+    width: 24px;  /* Adjust as needed */
+    height: 24px; /* Adjust as needed */
+}
+
     </style>
 </head>
 <body>
 
     <nav class="navbar navbar-expand-md navbar-light shadow fixed-top w-100 px-3 overlay-text" style="padding:5px;">
-        <img src="~/logo.png" class="navbar-brand" style="border-radius:10px;">
+        <img src="logo.png" class="navbar-brand" style="border-radius:10px;padding:0;">
         <button id="navbar-toggler" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -204,8 +354,10 @@
                 <li class="nav-item dropdown" id="languageDropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" style="font-weight: bolder;">اللغه</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/">عربيه</a></li>
+                       
                         <li><a class="dropdown-item" href="#" data-lang="en">انجليزيه</a></li>
+                       
+
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -225,70 +377,98 @@
     </nav>
 
     <div class="hero-section d-flex align-items-center justify-content-center text-center text-white flex-column" id="bubble-container">
-        @*     <h1 class="display-4 fw-bold">Welcome to My Website</h1>
-        <p class="lead">This is a full-screen hero section with Bootstrap.</p> *@
+     
     </div>
-    <div class="my-5" style="margin:0!important; background-color :#e6f7ff">
-        <div class="row text-center">
-            <div class="col-md-4">
-                <div class="section-box">
-                    <div class="icon">🤝</div>
-                    <h3>القيم الجوهرية</h3>
-                    <p>نحن نؤمن بأن الولاء، الابتكار، الجودة، العمل الجماعي، الشراكة هي أساس إجراءات الشركة التي تؤدي إلى نجاح أعمالنا.</p>
+    <section class="core-values">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="value-box">
+                        <div class="value-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>القيم الجوهرية</h3>
+                        <p>نحن نؤمن بأن الولاء، الابتكار، الجودة، العمل الجماعي، الشراكة هي أساس إجراءات الشركة التي تؤدي إلى نجاح أعمالنا.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="section-box">
-                    <div class="icon">💼</div>
-                    <h3>المهمة</h3>
-                    <p>توفير سوق المكملات الغذائية والمستحضرات الصيدلانية من خلال منتجات مبتكرة وعالية الجودة من أجل رعاية صحية أفضل.</p>
+                <div class="col-md-4">
+                    <div class="value-box">
+                        <div class="value-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3>المهمة</h3>
+                        <p>توفير سوق المكملات الغذائية والمستحضرات الصيدلانية من خلال منتجات مبتكرة وعالية الجودة من أجل رعاية صحية أفضل.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="section-box">
-                    <div class="icon">👁️</div>
-                    <h3>الرؤية</h3>
-                    <p>توفير المستحضرات الصيدلانية والمكملات الغذائية عالية الجودة مما يجعلها أكثر قابلية للوصول إلى الاحتياجات المطلوبة المستحقة لعملاء لدينا.</p>
+                <div class="col-md-4">
+                    <div class="value-box">
+                        <div class="value-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3>الرؤية</h3>
+                        <p>توفير المستحضرات الصيدلانية والمكملات الغذائية عالية الجودة مما يجعلها أكثر قابلية للوصول إلى الاحتياجات المطلوبة المستحقة لعملاء لدينا.</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="my-5" style="margin:0 !important;">
-        <div class="row align-items-center">
-            <!-- Left Part - Image -->
-            <div class="col-md-6 image-container">
-                <img src="~/photo2.jpg" alt="Sample Image" class="img-fluid">
-            </div>
-            <!-- Right Part - Text -->
-            <div class="col-md-6">
-                <h1 style="display: flex;justify-content: center;color: #17c1a3;">
-                    OZONE شركه
-                </h1>
-                <p style="display: flex;justify-content: center;">شركه متخصصه في المكملات الغذائيه بافضل جوده لاحسن  </p>
-            </div>
-        </div>
-    </div>
-    @* /////section 1/// *@
+    </section>
+ 
 
 
-    <div class="my-5" style="margin:0!important;" id="section2">
-        <div class="row align-items-center">
-            <!-- Left Part - Image -->
-            <!-- Right Part - Text -->
-            <div class="col-md-6">
-                <h1 style="display: flex;justify-content: center;color: #17c1a3;">
-                    من نحن
-                </h1>
-                <p style="display: flex;justify-content: center;">نحن شركه للمكملات الطبيه بمنتجات طبيعيه نباتيه </p>
-            </div>
-            <div class="col-md-6 image-container">
-                <img src="~/photo.jpg" alt="Sample Image" class="img-fluid">
+    <section class="about-section" id="section2">
+        <div class="container">
+            <h2 class="section-title">من نحن</h2>
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="about-image">
+                        <img src="photo3.jpeg" alt="About OZONE" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-content">
+                        <h2>OZONE شركة</h2>
+                        <p>نحن شركة متخصصة في المكملات الغذائية والمستحضرات الطبيعية. نسعى دائمًا لتقديم منتجات طبيعية نباتية عالية الجودة تلبي احتياجات عملائنا وتساهم في تحسين صحتهم وجودة حياتهم.</p>
+                        <p>نلتزم في اوزون بأعلى معايير الجودة والسلامة في جميع منتجاتنا، ونستخدم مكونات طبيعية مختارة بعناية لضمان فعاليتها وأمانها.</p>
+                        <!-- <h2>؟Ozone  لماذا تثق في منتجات </h2>
+                        <p>تضمن لك اوزون أعلى المعايير القياسية للجودة والكفائة من خلال أفضل وأجود المواد الطبيعية المنتقاة بعناية ،لتناسب احتياجاتك الطبية والغذائية ، وبتقنيات تصنيعية فريدة من الولايات المتحدة الأمريكية،وتطبيق أعلى مقاييس الجودة </p>
+                    </div> -->
+                </div>
+               
             </div>
         </div>
-    </div>
+    </section>
+    <section class="container py-5">
+        <div class="row justify-content-center" style="text-align: right;">
+            <div class="col-12">
+                <h2 class="text-center mb-4" style="font-weight: bolder;color: #17c1a3;">؟Ozone  لماذا تثق في منتجات </h2>
+            </div>
+            <!-- <h2>؟Ozone  لماذا تثق في منتجات </h2> -->
+            <p style="font-weight: bolder;margin: 0;display: inline;"> تضمن لك اوزون أعلى المعايير القياسية للجودة والكفائة من خلال أفضل وأجود المواد الطبيعية المنتقاة بعناية ،لتناسب احتياجاتك الطبية والغذائية ، وبتقنيات تصنيعية فريدة من الولايات المتحدة الأمريكية،وتطبيق أعلى مقاييس الجودة لذا فان منتجاتنا حاصله علي شهاده اداره الغذاء والدواء الأمريكيه وكذلك شهاده جوده التصنيع </p>
+            <!-- <p style="font-weight: bolder ;margin: 0;display: inline;"> لذا فان منتجاتنا حاصله علي شهاده اداره الغذاء والدواء الأمريكيه  FDA</p> -->
+            <!-- <p style="font-weight: bolder;display: inline; margin:0;" >GMP وكذلك شهاده جوده التصنيع </p><p style="font-weight: bolder;">لنصنع معا تكاملا فريدا وقصه نجاح مميزه </p> -->
+            <p style="font-weight: bolder;margin: 0;display: inline;">(FDA)&(GMP)</p>
+            <!-- <p style="font-weight: bolder;margin: 0;display: inline;">لنصنع معًا تكاملًا فريدًا وقصة نجاح مميزه</p> -->
+
+            
+            <!-- <p style="font-weight: bolder; margin: 0;">تضمن لك اوزون أعلى المعايير القياسية للجودة والكفائة من خلال أفضل وأجود المواد الطبيعية المنتقاة بعناية، لتناسب احتياجاتك الطبية والغذائية، وبتقنيات تصنيعية فريدة من الولايات المتحدة الأمريكية، وتطبيق أعلى مقاييس الجودة، لذا فإن منتجاتنا حاصلة على شهادة إدارة الغذاء والدواء الأمريكية FDA، وكذلك شهادة جودة التصنيع GMP، لنصنع معًا تكاملًا فريدًا وقصة نجاح مميزة.</p> -->
+
+            <!-- Certification Images -->
+            <div class="col-12">
+                <div class="d-flex flex-wrap justify-content-center align-items-center">
+                    <!-- <img src="c1.jpeg" alt="Certification 1" class="certification-image"> -->
+                    <img src="c1.jpeg" alt="Certification 2" class="certification-image">
+                    <img src="c3.jpeg" alt="Certification 4" class="certification-image">
+                    <img src="c2.jpeg" alt="Certification 3" class="certification-image">
+                    
+            
+                </div>
+            </div>
+        </div>
+    </section>
+
     @* ///////////////////////////// *@
     <!-- Products Section -->
-    <div class="container-fluid py-5" id="section4" style="background-color: #f8f9fa;">
+  @*   <div class="container-fluid py-5" id="section4" style="background-color: #f8f9fa;">
         <div class="container">
             <h2 class="text-center mb-5" style="color: #17c1a3;">منتجاتنا</h2>
 
@@ -296,6 +476,30 @@
                 @foreach (var product in Model)
                 {
                     <div class="col" style="width: 40%;">
+                        <div class="card h-100 shadow-sm" style="width: 100%; height: 120%;">
+                            <div style="width: 100%; height: 310px; overflow: hidden;">
+                                <img src="~/@product.img" class="card-img-top" alt="@product.ARName"
+                                     style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="card-body text-center">
+                                <h5 class="card-title fw-bold">@product.ARName</h5>
+                                
+                                <a href="/Home/ArDetails/@product.Id" class="btn w-100"
+                                   style="background-color: #17c1a3; color: white;">عرض التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div> *@
+    <div class="container-fluid py-5" id="section4" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="text-center mb-5" style="color: #17c1a3;">منتجاتنا</h2>
+
+            <div class="row" id="productList" style="justify-content: center;">
+                @foreach (var product in Model){
+                    <div class="col" style="width: 45%;">
                         <div class="card h-100 shadow-sm" style="width: 100%; height: 120%;">
                             <div style="width: 100%; height: 310px; overflow: hidden;">
                                 <img src="~/@product.img" class="card-img-top" alt="@product.ARName"
@@ -313,58 +517,61 @@
             </div>
         </div>
     </div>
-
     @* ////////////////////////////// *@
 
     @* /////section 2/// *@
-    <div class="my-5" style="margin:0!important; background-color:#e6f7ff" id="section3">
+    <div class="my-5" style="margin:0!important; background-color:#2D6A87" id="section3">
 
         <div class="row text-center">
             <div class="col-md-4 mb-4">
                 <div class="section-box">
                     <div class="icon">🏢</div>
                     <h3>الجودة</h3>
-                    <p>الجودة أمر بالغ الأهمية. ونراقب في OZONE على دراية كبيرة بأحدث الأمور المتعلقة بالمكملات الغذائية.</p>
+                    <p style="color:white;margin:0;">اوزون على دراية كبيرة بأن الجودة أمر بالغ الأهمية لذلك فنحن نراعي أعلى مقاييس الجودة للمكملات الغذائية 
+                        منتجاتنا حاصلة على شهادة إدارة الغذاء والدواء الأمريكية وشهادة جودة التصنيع الأمريكية</p>
+                    <!-- <p style="color:white;margin:0;"> منتجاتنا حاصلة على موافقة هيئة الغذاء والدواء الأمريكية وشهادة جودة التصنيع الأمريكية</p>  -->
+                    <p style="color:white">(FDA)&(GMP)</p> 
+                    
                 </div>
             </div>
             <div class="col-md-4 mb-4">
                 <div class="section-box">
                     <div class="icon">🤝</div>
                     <h3>رعاية العميل</h3>
-                    <p>تضمن OZONE مساعدة شركائها في تحقيق النجاح، من خلال مستوى خدمة العملاء على استعداد لإرشادك خلال أي مرحلة من مراحل عملية تطوير المنتج بهدف إرضائك.</p>
+                    <p style="color:white">تضمن اوزون مساعدة شركائها في تحقيق النجاح، من خلال مستوى خدمة العملاء على استعداد لإرشادك خلال أي مرحلة من مراحل عملية تطوير المنتج بهدف إرضائك.</p>
                 </div>
             </div>
             <div class="col-md-4 mb-4">
                 <div class="section-box">
                     <div class="icon">💰</div>
                     <h3>أسعار تنافسية</h3>
-                    <p>مع OZONE، أنت ملزم بالحصول على قيمة مقابل نقودك، نحن نقدم الخدمات التي تحتاجها بسعر تنافسي يتناسب بشكل جيد مع ميزانية عملك.</p>
+                    <p style="color:white">مع اوزون أنت ملزم بالحصول على قيمة مقابل نقودك، نحن نقدم الخدمات التي تحتاجها بسعر تنافسي يتناسب بشكل جيد مع ميزانية عملك.</p>
                 </div>
             </div>
             <div class="col-md-4 mb-4">
                 <div class="section-box">
                     <div class="icon">🌿</div>
                     <h3>مكونات طبيعية</h3>
-                    <p>تلتزم OZONE باستخدام مكونات طبيعية عالية الجودة وأفضل ممارسات الصحة والعناية.</p>
+                    <p style="color:white">تلتزم اوزون باستخدام مكونات طبيعية عالية الجودة وأفضل ممارسات الصحة والعناية.</p>
                 </div>
             </div>
             <div class="col-md-4 mb-4">
                 <div class="section-box">
                     <div class="icon">📊</div>
                     <h3>نتائج</h3>
-                    <p>تلتزم OZONE بإحداث تأثير إيجابي طويل الأمد على سوق الرعاية الصحية، مما يوفر بيئة مبتكرة لإحداث الفرق الذي تطمح إليه.</p>
+                    <p style="color:white">تلتزم اوزون بإحداث تأثير إيجابي طويل الأمد على سوق الرعاية الصحية، مما يوفر بيئة مبتكرة لإحداث الفرق الذي تطمح إليه.</p>
                 </div>
             </div>
             <div class="col-md-4 mb-4">
                 <div class="section-box">
                     <div class="icon">🌍</div>
                     <h3>تنوع</h3>
-                    <p>تقدم OZONE مجموعة واسعة من المنتجات المناسبة للجميع.</p>
+                    <p style="color:white">تقدم اوزون مجموعة واسعة من المنتجات المناسبة للجميع.</p>
                 </div>
             </div>
         </div>
     </div>
-    @* /////section 3/// *@
+    
 
 
 
@@ -374,7 +581,7 @@
     <div class="py-5" style="padding:0!important;background-color:#ffffffe0">
         <div class="row align-items-center">
             <div class="col-lg-6 text-center mt-4 mt-lg-0">
-                <img src="~/catalog.png" alt="Furni Catalog" class="img-fluid">
+                <img src="catalog.png" alt="Furni Catalog" class="img-fluid">
             </div>
             <div class="col-lg-6 text-center text-lg-start" style="padding: 5%;text-align: center !important;">
                 <h2>OZONE كتالوج</h2>
@@ -388,15 +595,21 @@
     </div>
 
 
-    <div class="py-5" style="padding-top:0 !important;padding-bottom: 0 !important; background-color:#d3f0fd" id="section1">
+    <div class="py-5" style="padding-top:0 !important;padding-bottom: 0 !important; background-color:#2D6A87" id="section1">
         <div class="row">
             <div class="col-lg-6">
                 <div class="ratio ratio-16x9">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29383.334960273092!2d47.960395592809235!3d29.376174846895495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fcf9c83ce455983%3A0xc3ebaef5af09b90e!2sKuwait%20City%2C%20Kuwait!5e0!3m2!1sen!2seg!4v1729602633729!5m2!1sen!2seg" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28969.19894022147!2d55.73012611663247!3d24.20754190609124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5799337a6c3a45%3A0xb99e4d64fef35890!2z2KfZhNiq2KfZhdi52Kkg2YXYr9mK2LHZitmG!5e0!3m2!1sen!2sae!4v1711122334455!5m2!1sen!2sae" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 </div>
+                
             </div>
             <div class="col-lg-6" style="padding: 5%;direction: rtl;">
-                <h2 class="mb-4"> تواصل معنا</h2>
+                <h2 class="mb-4" style="color:white"> تواصل معنا</h2>
                 <div class="d-flex align-items-center mb-3">
                     <div class="icon-wrapper me-3">
                         <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -404,7 +617,7 @@
                             <circle cx="12" cy="10" r="3"></circle>
                         </svg>
                     </div>
-                    <div>OZONE شركه<br>شارع احمد بك, الدور الرابع ,الامارات.</div>
+                    <div  style="color:white;padding: 10px;">OZONE شركه<br>الامارات :مدينه العين.</div>
                 </div>
                 <div class="d-flex align-items-center mb-3">
                     <div class="icon-wrapper me-3">
@@ -413,15 +626,17 @@
                             <polyline points="12 6 12 12 16 14"></polyline>
                         </svg>
                     </div>
-                    <div>8:00am : 4:00pm<br><span class="text-muted">(من الأحد للخميس)</span></div>
+                    <div  style="color:white;padding: 10px;">8:00am : 4:00pm<br><span  class="text-muted"  style="color:white !important">(من الأحد للخميس)</span></div>
                 </div>
                 <div class="d-flex align-items-center mb-3">
                     <div class="icon-wrapper me-3">
-                        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        <svg class="email-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
+                            <path d="M22 6l-10 7L2 6"></path>
                         </svg>
                     </div>
-                    <div>+965 9998 0809</div>
+                    
+                    <div  style="color:white;padding: 10px;">msir100@yahoo.com</div>
                 </div>
             </div>
 
